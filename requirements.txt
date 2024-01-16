@@ -1,7 +1,6 @@
 asgiref==3.7.2
 Django==4.2.9
-h5py==3.1.0
-
+keras==2.15.0
 opencv-python==4.9.0.80
 pillow==10.2.0
 numpy==1.26.3
