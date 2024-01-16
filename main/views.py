@@ -8,6 +8,7 @@ from django.template.response import TemplateResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.core.files.storage import FileSystemStorage
 import matplotlib.image as mpimg
+from keras.models import load_model
 
 
 class CustomFileSystemStorage(FileSystemStorage):
@@ -40,7 +41,7 @@ def index(request):
         input_image = np.expand_dims(normalized_image, axis=0)
 
         model_path = os.path.join(settings.BASE_DIR, "model.h5")
-        model = tf.keras.models.load_model(model_path)
+        model = load_model(model_path)
         result = model.predict(input_image)
         print("Result:", result[0][0])
         Fire = result[0][0] >= 0.5
