@@ -43,9 +43,9 @@ def index(request):
         model_path = os.path.join(settings.BASE_DIR, "model.h5")
         model = load_model(model_path)
         result = model.predict(input_image)
-        print("Result:", result[0][0])
+        # print("Result:", result[0][0])
         Fire = result[0][0] >= 0.5
-        print("Fire:", Fire)
+        # print("Fire:", Fire)
         if Fire:
             prediction = "Fire"
         else:
