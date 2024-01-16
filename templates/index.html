@@ -11,7 +11,7 @@
 
   <body>
     <div class="header">
-      <h1><span>Image Prediction Tool</span> with Django</h1>
+      <h1><span>Fire Prediction</span></h1>
     </div>
 
     <form method="POST" enctype="multipart/form-data">
@@ -24,7 +24,7 @@
         id="file"
       />
       <button class="compress_image" type="submit" id="submitBtn">
-        Predict Animal
+        Predict Fire
       </button>
       <div class="status">
         <p id="message">{{ message }}</p>
@@ -40,12 +40,10 @@
 
       <div class="info_container">
         <ul>
-          <li>Name: <span class="name">{{ image.name }}</span></li>
+          <li>Name: <span class="name">{{ filename }}</span></li>
           <li>Prediction: <span class="type">{{ prediction }}</span></li>
         </ul>
       </div>
     </div>
-
-    <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>

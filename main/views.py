@@ -2,12 +2,12 @@ import os
 import cv2
 from PIL import Image
 import numpy as np
-
 import tensorflow as tf
 from django.conf import settings
 from django.template.response import TemplateResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.core.files.storage import FileSystemStorage
+import matplotlib.image as mpimg
 
 
 class CustomFileSystemStorage(FileSystemStorage):
@@ -27,44 +27,37 @@ def index(request):
 
         # Use full system path instead of fss.url(_image)
         path = os.path.join(settings.MEDIA_ROOT, _image)
-        print("Image Path:", path)
 
         # Read the image
-        imag = cv2.imread(path)
 
-        if imag is None:
+        image = mpimg.imread(path)
+        if image is None:
             raise ValueError(
                 "Failed to read the image. Make sure the file path is correct."
             )
+        resized_image = cv2.resize(image, (256, 256))
+        normalized_image = resized_image / 256.0
+        input_image = np.expand_dims(normalized_image, axis=0)
 
-        img_from_ar = Image.fromarray(imag, "RGB")
-
-        # Resize the image to match the model's input shape (256, 256)
-        resized_image = img_from_ar.resize((256, 256))
-
-        # Convert the resized image to a NumPy array
-        test_image = np.expand_dims(np.array(resized_image), axis=0)
-
-        # Load the model
-        model = tf.keras.models.load_model(os.path.join(settings.BASE_DIR, "model.h5"))
-
-        # Make predictions
-        result = model.predict(test_image)
-        print("Prediction: " + str(np.argmax(result)))
-
-        if np.argmax(result) == 0:
+        model_path = os.path.join(settings.BASE_DIR, "model.h5")
+        model = tf.keras.models.load_model(model_path)
+        result = model.predict(input_image)
+        print("Result:", result[0][0])
+        Fire = result[0][0] >= 0.5
+        print("Fire:", Fire)
+        if Fire:
             prediction = "Fire"
-        elif np.argmax(result) == 1:
-            prediction = "No Fire"
         else:
-            prediction = "Unknown"
+            prediction = "No Fire"
 
+        # Pass the filename to the template
+        filename = _image  # Assuming you want to pass the full filename
         return TemplateResponse(
             request,
             "index.html",
             {
                 "message": message,
-                "image": image,
+                "filename": filename,  # Include the filename in the context
                 "image_url": fss.url(_image),
                 "prediction": prediction,
             },
