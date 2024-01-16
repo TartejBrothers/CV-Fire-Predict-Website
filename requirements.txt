@@ -3,7 +3,7 @@ asgiref==3.3.4
 astunparse==1.6.3
 certifi==2023.11.17
 cycler==0.10.0
-Django==4.2.9
+Django==3.2.0
 flatbuffers==1.12
 fonttools==4.47.2
 gast==0.5.4
@@ -24,3 +24,4 @@ sqlparse==0.4.4
 typing-extensions==4.9.0
 urllib3==1.26.6
 wrapt==1.12.1
+
