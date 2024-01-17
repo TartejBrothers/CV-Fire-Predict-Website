@@ -78,3 +78,29 @@ input[type="file"]::file-selector-button {
 ul li {
   margin-bottom: 10px;
 }
+ul li {
+  list-style: none;
+}
+.wrapperimg {
+  width: 400px;
+}
+@media screen and (max-width: 1000px) {
+  .wrapper {
+    width: 100vw;
+  }
+  .wrapperimg {
+    width: 100vw;
+  }
+  ul li {
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .compress_image {
+    margin: 20px auto 20px auto;
+  }
+}
