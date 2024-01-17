@@ -33,8 +33,7 @@
 
     <div class="wrapper">
       <img
-        src="{% if image_url %}{{ image_url }}{% else %}{% static 'images/default.png' %}{% endif %}"
-        alt="Compressed Image"
+        src="{% if image_url %}{{ image_url }}{% else %}{% static 'images/noimage.jpg' %}{% endif %}"
         width="400px"
       />
 
