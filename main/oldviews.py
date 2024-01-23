@@ -15,7 +15,6 @@ class CustomFileSystemStorage(FileSystemStorage):
         self.delete(name)
         return name
 
-
 def index(request):
     message = ""
     prediction = ""
