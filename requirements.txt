@@ -11,6 +11,7 @@ dm-tree==0.1.8
 et-xmlfile==1.1.0
 flatbuffers==23.5.26
 fonttools==4.47.2
+gunicorn==21.2.0
 h5py==3.10.0
 humanfriendly==10.0
 keras==3.0.4
